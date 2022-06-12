@@ -1,0 +1,14 @@
+.container{
+    position:relative;
+    top:300px;
+    width:60%;
+    display:flex;
+    justify-content:center;
+    flex-wrap: wrap;
+    margin: auto;
+}
+.class1{
+    width:150px;
+    text-align: center;
+    margin: 15px;
+}
