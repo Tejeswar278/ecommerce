@@ -53,14 +53,14 @@ router.get("/:id/addressess", async (req,res) => {
     }
 })
 
-router.patch("/:id/addressess/create", async (req,res) => {
+router.post("/:id/addressess/create", async (req,res) => {
     try {
-        const address = await User.updateOne({ _id: req.params.id },{ $push: { Address: req.body } });
-        if(address.acknowledged === true){
-            const user = await User.findById(req.params.id).lean().exec();
-            return res.status(200).send(address);
-        }
-        return res.status(404).send({message: error.message});
+        const user = await User.findByIdAndUpdate(
+            req.params.id,
+            { $push: { address: { ...req.body } } },
+            { new: true }
+          );
+        return res.status(200).send(user)
     } catch (error) {
         res.status(400).send({message:error.message})
     }
